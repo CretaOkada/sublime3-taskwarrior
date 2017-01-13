@@ -23,7 +23,8 @@ class TaskWarriorAPI:
         return tasks
 
     def task_add(self, input):
-        subprocess.call(['task', 'add', input])
+        addCommand = 'task add ' + input
+        subprocess.call(addCommand.split(' '))
         tasks = self.load_tasks()
         return tasks[-1]['id']
 
