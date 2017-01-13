@@ -60,7 +60,6 @@ class TaskwarriorViewTasksCommand (sublime_plugin.WindowCommand):
 
         if twprojects is None or resetProjects == True:
             twprojects = self.get_projects()
-
         self.pri = []
         self.pri.append([u'\u271A' + ' Add a New Task', 'Create a task from the input panel'])
         try:
@@ -68,9 +67,17 @@ class TaskwarriorViewTasksCommand (sublime_plugin.WindowCommand):
             for twproject in twprojects:
                 additional_data = 'See a list of all pending tasks'
                 if twproject != 'View all tasks':
-                    pending = 'Pending: ' + subprocess.Popen(['task', 'project:' + twproject, 'count', 'status:pending'], stdout=subprocess.PIPE).communicate()[0]
-                    completed = 'Completed: ' + subprocess.Popen(['task', 'project:' + twproject, 'count', 'status:completed'], stdout=subprocess.PIPE).communicate()[0]
-                    additional_data = pending + completed
+                    pendingProcess = subprocess.Popen(
+                    	['task', 'project:' + twproject, 'count', 'status:pending'],
+                    	stdout=subprocess.PIPE,
+                    )
+                    pendingTaskData = 'Pending: ' + pendingProcess.communicate()[0].decode('ascii')
+                    completedProcess = subprocess.Popen(
+                    	['task', 'project:' + twproject, 'count' 'status:completed'],
+                    	stdout=subprocess.PIPE,
+                    )
+                    completedTaskData = 'Completed: ' + completedProcess.communicate()[0].decode('ascii')
+                    additional_data = pendingTaskData + completedTaskData
                 self.pri.append([twproject, additional_data])
         except:
             pass
