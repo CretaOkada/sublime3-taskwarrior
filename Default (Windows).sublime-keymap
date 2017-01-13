@@ -1,0 +1,18 @@
+[
+  {
+    "keys": ["ctrl+alt+t"],
+    "command": "taskwarrior_view_tasks"
+  },
+  {
+    "keys": ["ctrl+shift+a"],
+    "command": "taskwarrior_add_task_from_input"
+  },
+  {
+    "keys": ["ctrl+shift+a", "ctrl+shift+t"],
+    "command": "taskwarrior_annotate_newest_task_from_input"
+  },
+  {
+    "keys": ["ctrl+shift+a", "ctrl+shift+t"],
+    "command": "taskwarrior_annotate_newest_task_from_clipboard"
+  }
+]
